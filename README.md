@@ -13,3 +13,4 @@ To start the project, run the following commands at the project repository:
 - node app.js
 
 - ng serve
+
