@@ -4,6 +4,7 @@ Project         = require('../models/project'),
 router          = express.Router();
 
 //Finds all Projects
+//adding comments to git 
 router.get("", (req, res) => {
     Project.find({}, (err, projects) => {
         if(err)
