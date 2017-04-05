@@ -7,12 +7,23 @@
     background-size: 100% 100%;
 }
 
+h3{
+    text-align: center;
+}
+
 .link{
     color:white;
     font-size: 1.5em;
 }
 #user-photo{
-    border-radius: 50%
+    border-radius: 50%;
+    width:60%;
+    height:60%;
+}
+
+.card-img-top{
+  width:100%;
+  height:auto;
 }
 
 .jumbotron{
@@ -41,6 +52,10 @@
     align-content: center;
     text-align: center;
     font-size: 100%
+}
+
+.card-group{
+    display: flex;
 }
 
 .jumbo-midle {

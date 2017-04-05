@@ -18,4 +18,14 @@ export class ProjectService {
     return this.http.post('http://localhost:8080/projects/new', project, {headers: headers})
     .map(res => res.json());
   }
+
+  getProjects(){
+     return this.http.get('http://localhost:8080/projects/')
+    .map(res => res.json());
+  }
+
+  getSingleProject(projectId){
+    return this.http.get('http://localhost:8080/projects/' + projectId)
+    .map(res => res.json());
+  }
 }

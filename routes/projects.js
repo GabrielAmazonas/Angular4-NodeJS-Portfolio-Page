@@ -2,9 +2,22 @@ const express   = require('express'),
 mongoose        = require('mongoose'),
 Project         = require('../models/project'),
 router          = express.Router();
+//Find One single Project
+router.get("/:id", (req, res) => {
+    Project.findById(req.params.id, (err, foundProject) => {
+        if(err){
+            console.log("Error:")
+            console.log(foundProject);
+            res.send('localhost:4200')
+        } else {
+             console.log("Success:");
+             console.log(foundProject);
+            res.send('localhost:4200/new');
+        }
+    });
+});
 
 //Finds all Projects
-//adding comments to git 
 router.get("", (req, res) => {
     Project.find({}, (err, projects) => {
         if(err)
@@ -42,5 +55,4 @@ router.post("/new", (req, res) => {
    
 });
 
-//Create project
 module.exports = router;
