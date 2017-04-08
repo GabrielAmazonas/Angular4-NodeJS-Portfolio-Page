@@ -22,10 +22,6 @@ export class ProjectDetailsComponent implements OnInit {
   
    getProject() {
      this.project = this.projectService.getSingleProject(this.route.snapshot.params['id']);
-     this.title = this.project.title;
-     console.log("Title: " + this.title);
-     this.description = this.project.description;
-     this.image = this.project.image;
   }
 
 }
