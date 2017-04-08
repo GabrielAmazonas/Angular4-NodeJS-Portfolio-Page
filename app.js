@@ -1,5 +1,6 @@
 const express   = require('express'),
 app             = express(),
+methodOverride  = require('method-override'),
 bodyParser      = require('body-parser'),
 path            = require('path'),
 cors            = require('cors'),
@@ -28,7 +29,10 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(methodOverride("_method"));
+
 app.use('/projects', projects);
+
 
 //TODO: Needs a /projects/new route on the front-end that redirects here:
 //RESTful route: Create. Creates a new project them redirects to the Index route.

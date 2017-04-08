@@ -3,19 +3,41 @@ mongoose        = require('mongoose'),
 Project         = require('../models/project'),
 router          = express.Router();
 
-//Find One single Project
+//SHOW Route
 router.get("/:id", (req, res) => {
     Project.findById(req.params.id, (err, foundProject) => {
         if(err){
-            console.log("Error:");
             console.log(foundProject);
         } else {
-             console.log("Success:");
-             console.log(foundProject);
             res.send(foundProject);
         }
     });
 });
+
+//EDIT Route
+router.get("/:id/edit", (req, res) => {
+    Project.findById(req.params.id, (err, foundProject) => {
+        if(err){
+            console.log(foundProject);
+        } else {
+            res.send(foundProject);
+        }
+    })
+});
+
+//UPDATE Route
+router.put("/:id/edit"), (req, res) => {
+    console.log("FOUND URL");
+    Project.findByIdAndUpdate(req.params.id, (err, foundProject) => {
+         if(err)
+        {
+            res.json({success: false, msg:'Failed to create project'});
+        } else
+        {
+            res.json({success: true, msg:'Project created.'});
+        }
+    });
+}
 
 //Finds all Projects
 router.get("", (req, res) => {
@@ -47,7 +69,7 @@ router.post("/new", (req, res) => {
             res.json({success: false, msg:'Failed to create project'});
         } else
         {
-            res.json({success: true, msg:'Project created.'})
+            res.json({success: true, msg:'Project created.'});
         }
 
     });

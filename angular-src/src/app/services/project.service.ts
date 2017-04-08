@@ -28,4 +28,16 @@ export class ProjectService {
     return this.http.get('http://localhost:8080/projects/' + projectId)
     .map(res => res.json());
   }
+
+  getProjectToEdit(projectId){
+     return this.http.get('http://localhost:8080/projects/' + projectId + '/edit')
+    .map(res => res.json());
+  }
+
+  findProjectAndUpdate(projectId){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/projects/' + projectId + '/edit' + '?_method=PUT', {headers: headers})
+    .map(res => res.json());
+  }
 }
