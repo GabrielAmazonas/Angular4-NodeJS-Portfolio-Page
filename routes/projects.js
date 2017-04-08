@@ -26,18 +26,31 @@ router.get("/:id/edit", (req, res) => {
 });
 
 //UPDATE Route
-router.put("/:id/edit"), (req, res) => {
+router.put("/:id/edit", (req, res) => {
     console.log("FOUND URL");
-    Project.findByIdAndUpdate(req.params.id, (err, foundProject) => {
+    console.log(req.body);
+
+      let newProject = {
+        title: req.body.title,
+        image: req.body.image,
+        description: req.body.description
+    };
+
+    console.log('---------------');
+    console.log(newProject);
+
+    Project.findByIdAndUpdate(req.params.id, newProject, (err, foundProject) => {
          if(err)
-        {
+        {   
+            console.log(err);
+            console.log('ruim:');
             res.json({success: false, msg:'Failed to create project'});
         } else
         {
             res.json({success: true, msg:'Project created.'});
         }
-    });
-}
+    }
+)});
 
 //Finds all Projects
 router.get("", (req, res) => {

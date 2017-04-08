@@ -33,13 +33,18 @@ export class EditProjectComponent implements OnInit {
   
 
   onRegisterSubmit(){
-     const validateProject = {
-      title: this.project.title,
-      image: this.project.image,
-      description: this.project.description
+     let validateProject = {
+      title: this.title,
+      image: this.image,
+      description: this.description
     }
 
-      this.projectService.findProjectAndUpdate(this.route.snapshot.params['id']).subscribe(data => {
+
+      if(!this.validateService.validateNewProject(validateProject)){
+      this.flashMessages.show('Please fill all the form.', {cssClass: 'alert-danger', timeout: 3000})
+      return false;
+    } else {
+      this.projectService.findProjectAndUpdate(this.route.snapshot.params['id'], validateProject).subscribe(data => {
         if(data.success){
         this.flashMessages.show('Project Updated', {cssClass: 'alert-success', timeout: 3000})
         this.router.navigate(['/']);
@@ -48,6 +53,7 @@ export class EditProjectComponent implements OnInit {
         this.router.navigate(['/']);
         }
       });
+    }
     
   }
   

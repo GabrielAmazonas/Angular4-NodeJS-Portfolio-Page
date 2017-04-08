@@ -34,10 +34,11 @@ export class ProjectService {
     .map(res => res.json());
   }
 
-  findProjectAndUpdate(projectId){
+  findProjectAndUpdate(projectId, validateProject){
+    console.log("Service.ts. projectId: " + projectId);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/projects/' + projectId + '/edit' + '?_method=PUT', {headers: headers})
+    return this.http.post('http://localhost:8080/projects/' + projectId + '/edit' + '?_method=PUT',validateProject, {headers: headers})
     .map(res => res.json());
   }
 }
