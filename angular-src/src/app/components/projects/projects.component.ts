@@ -18,16 +18,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.projectService.getProjects().subscribe(response => {
-    console.log(response);
-    this.projects = response;
-    })
-  }
-
-  onDetailsClick(projectId){
-    this.projectService.getSingleProject(projectId).subscribe(response => {
-      this.project = response;
-    });
+    this.projects = this.projectService.getProjects();
   }
 
 }
