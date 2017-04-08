@@ -1,8 +1,7 @@
-<div class="container-fluid">
+<div *ngIf="project | async as project" class="container-fluid">
   <h3>Project Details</h3>
     <div class="card col-xs-12 col-md-4">
-      <p>{{project.image}}</p>
-      <p>{{project.image}}</p>
+      <p>{{project.title}}</p>
       <p>{{project.description}}
     </div>
 </div>

@@ -9,16 +9,23 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  private project: any;
-  private projectId: String;
+  project: any;
+  title: any;
+  description: any;
+  image: any;
+  
   constructor(private projectService : ProjectService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.projectId = this.route.snapshot.params['id'];
-    this.projectService.getSingleProject(this.projectId).subscribe((res) => {
-      console.log(res);
-      this.project = res;
-    });
+   this.getProject();
+  }
+  
+   getProject() {
+     this.project = this.projectService.getSingleProject(this.route.snapshot.params['id']);
+     this.title = this.project.title;
+     console.log("Title: " + this.title);
+     this.description = this.project.description;
+     this.image = this.project.image;
   }
 
 }

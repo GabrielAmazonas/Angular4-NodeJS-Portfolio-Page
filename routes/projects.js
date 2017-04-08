@@ -11,6 +11,7 @@ router.get("/:id", (req, res) => {
             console.log(foundProject);
         } else {
              console.log("Success:");
+             console.log(foundProject);
             res.send(foundProject);
         }
     });
