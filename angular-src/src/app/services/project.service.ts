@@ -35,10 +35,18 @@ export class ProjectService {
   }
 
   findProjectAndUpdate(projectId, validateProject){
-    console.log("Service.ts. projectId: " + projectId);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:8080/projects/' + projectId + '/edit' + '?_method=PUT',validateProject, {headers: headers})
     .map(res => res.json());
+  }
+
+  deleteProject(projectId){
+    let headers = new Headers();
+    console.log("Test Delete Method");
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8080/projects/' + projectId + '?_method=DELETE' , {headers: headers})
+    .map(res => res.json());
+
   }
 }

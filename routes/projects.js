@@ -25,6 +25,19 @@ router.get("/:id/edit", (req, res) => {
     })
 });
 
+//DELETE Route
+router.delete("/:id", (req, res) => {
+    Project.findByIdAndRemove(req.params.id, (err) => {
+        console.log(req.params.id);
+        if(err){
+             res.json({success: false, msg:'Failed to delete project'});
+        } else {
+            res.json({success: true, msg:'Project deleted.'});
+        }
+
+    })
+});
+
 //UPDATE Route
 router.put("/:id/edit", (req, res) => {
     console.log("FOUND URL");
@@ -36,14 +49,10 @@ router.put("/:id/edit", (req, res) => {
         description: req.body.description
     };
 
-    console.log('---------------');
-    console.log(newProject);
 
     Project.findByIdAndUpdate(req.params.id, newProject, (err, foundProject) => {
          if(err)
         {   
-            console.log(err);
-            console.log('ruim:');
             res.json({success: false, msg:'Failed to create project'});
         } else
         {
@@ -66,7 +75,7 @@ router.get("", (req, res) => {
     });
 });
 
-//new form action
+//NEW route
 router.post("/new", (req, res) => {
 
     let newProject = new Project({
