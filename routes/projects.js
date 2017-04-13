@@ -1,6 +1,7 @@
 const express   = require('express'), 
 mongoose        = require('mongoose'),
 Project         = require('../models/project'),
+sanitizer       = require('sanitizer'),
 router          = express.Router();
 
 //SHOW Route
@@ -40,8 +41,10 @@ router.delete("/:id", (req, res) => {
 
 //UPDATE Route
 router.put("/:id/edit", (req, res) => {
-    console.log("FOUND URL");
-    console.log(req.body);
+    
+    req.body.title = sanitizer.escape(req.body.title);
+    req.body.image = sanitizer.escape(req.body.image);
+    req.body.description = sanitizer.escape(req.body.description);
 
       let newProject = {
         title: req.body.title,
@@ -56,7 +59,7 @@ router.put("/:id/edit", (req, res) => {
             res.json({success: false, msg:'Failed to create project'});
         } else
         {
-            res.json({success: true, msg:'Project created.'});
+            res.json({success: true, msg:'Project uptadet.'});
         }
     }
 )});
