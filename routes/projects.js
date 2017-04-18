@@ -41,7 +41,7 @@ router.delete("/:id", (req, res) => {
 
 //UPDATE Route
 router.put("/:id/edit", (req, res) => {
-    
+
     req.body.title = sanitizer.escape(req.body.title);
     req.body.image = sanitizer.escape(req.body.image);
     req.body.description = sanitizer.escape(req.body.description);
@@ -80,6 +80,10 @@ router.get("", (req, res) => {
 
 //NEW route
 router.post("/new", (req, res) => {
+
+    req.body.title = sanitizer.escape(req.body.title);
+    req.body.image = sanitizer.escape(req.body.image);
+    req.body.description = sanitizer.escape(req.body.description);
 
     let newProject = new Project({
         title: req.body.title,
