@@ -6,7 +6,7 @@ To start the project, run the following commands at the project repository:
 
 - OBS: This may require SUDO access or Administrator access.
 
-- mongod service start
+- sudo service mongod start
 
 - npm install
 
