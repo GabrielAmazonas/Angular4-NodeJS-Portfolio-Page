@@ -8,6 +8,10 @@ passport        = require('passport'),
 config          = require('./config/database'),
 mongoose        = require('mongoose');
 
+//Routes Modules imports.
+const projects = require('./routes/projects'),
+users           = require('./routes/users');
+
 mongoose.connect(config.database);
 
 
@@ -21,15 +25,16 @@ mongoose.connection.on('error', (error) => {
     console.log('Failed to connect to database' + error);
 });
 
-const projects = require('./routes/projects')
-
 app.use(cors());
 
 app.use(bodyParser.json());
 
+//TODO: Check this
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(methodOverride("_method"));
+
+app.use('/users', users);
 
 app.use('/projects', projects);
 

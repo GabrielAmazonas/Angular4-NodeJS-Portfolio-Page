@@ -3,7 +3,7 @@
   <form (submit)="onRegisterSubmit()" action="" >
     <div class="form-group">
       <label for="">Title</label>
-      <input type="text" class ="form-control" [(ngModel)]="title"  name="title" [placeholder]="project.title" >
+      <input class ="form-control" [(ngModel)]="title"  name="title" [type]="text"[placeholder]="project.title" />
     </div>
     <div class="form-group">
       <label for="">Image Url</label>

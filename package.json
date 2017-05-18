@@ -15,10 +15,13 @@
     "cors": "*",
     "express": "^4.15.2",
     "express-sanitizer": "^1.0.2",
+    "express-session": "^1.15.2",
     "jsonwebtoken": "*",
     "method-override": "^2.3.8",
-    "mongoose": "^4.9.2",
-    "passport": "*",
-    "passport-jwt": "*"
+    "mongoose": "^4.9.9",
+    "passport": "^0.3.2",
+    "passport-jwt": "*",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0"
   }
 }
