@@ -14,7 +14,6 @@ users           = require('./routes/users');
 
 mongoose.connect(config.database);
 
-
 //On database connection
 mongoose.connection.on('connected', () => {
     console.log('Connected to database: ' + config.database);
