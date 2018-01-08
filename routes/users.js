@@ -35,7 +35,7 @@ router.post('/login', (req, res, next) =>{
         email: 'gabriel@gmail.com'
     }
     //sign params: payload, secret key
-    jwt.sign({profile}, 'secretkey', (err, token) => {
+    jwt.sign({profile}, 'secretkey',{expiresIn: '30m'}, (err, token) => {
         res.json({
             token
         });
