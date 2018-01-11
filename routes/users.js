@@ -1,7 +1,8 @@
 const express     = require('express'),
 jwt               = require('jsonwebtoken'),
 User              = require('../models/user'),
-passport          = require('passport')
+passport          = require('passport'),
+config            = require('../config/database'),
 router      = express.Router();
 
 verifyToken = (req, res, next) => {
@@ -24,12 +25,15 @@ verifyToken = (req, res, next) => {
 }
 
 router.post('/register', (req, res, next) =>{
+    console.info('Request: ', req.body.username)
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
         password: req.body.password
     });
+
+    console.info('New User: ', newUser);
 
     User.addUser(newUser,  (err, user) => {
         if(err){
@@ -77,9 +81,41 @@ router.post('/profile', verifyToken, (req, res, next) =>{
     
 });
 
-//Validate
-router.get('/validate', (req, res, next) =>{
-    res.send('validate here.');
+//Authenticate
+router.post('/authenticate', (req, res, next) =>{
+    const username = req.body.username;
+    const password = req.body.password;
+
+    User.getUserByUsername(username, (err, user) => {
+        if(err) throw err;
+
+        if(!user){
+            return res.json({success: false, msg: 'User not found.'})
+        } 
+
+        User.comparePassword(password, user.password, (err, isMatch) => {
+            if(err) throw err;
+            if(isMatch){
+
+                const token = jwt.sign({user}, config.secret, {
+                    expiresIn: 604800 //1 Week
+                });
+
+                res.json({
+                    success: true,
+                    token: 'JWT '+ token,
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email
+                    }
+                })
+            } else {
+                return res.json({success: false, msg: 'Wrong password'})
+            }
+        })
+    })
 });
 
 //Token format:

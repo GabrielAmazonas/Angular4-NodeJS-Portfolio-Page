@@ -28,6 +28,12 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+require('./config/passport')(passport)
+
 //TODO: Check this
 app.use(express.static(path.join(__dirname, 'public')));
 
